@@ -1,0 +1,6 @@
+{
+  "name": "AgentGuard",
+  "description": "Per-task cost tracking and budget caps for teams spending $5K–$50K a month on AI agents in production.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

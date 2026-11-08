@@ -1,0 +1,84 @@
+{
+  "entities": {
+    "Lead": {
+      "title": "Lead",
+      "description": "Validation signup record captured from the landing page",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "User email address for audit onboarding",
+          "maxLength": 256
+        },
+        "source": {
+          "type": "string",
+          "description": "CTA source location where the user submitted",
+          "maxLength": 64
+        },
+        "tier": {
+          "type": "string",
+          "description": "Optional pricing tier reserved (Starter, Team, Scale)",
+          "maxLength": 32
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO timestamp of creation",
+          "maxLength": 64
+        },
+        "timestamp": {
+          "type": "object",
+          "description": "Server timestamp of creation"
+        }
+      },
+      "required": ["email", "source", "createdAt"]
+    },
+    "AppSetting": {
+      "title": "AppSetting",
+      "description": "Global application setting and Launch HQ owner state",
+      "type": "object",
+      "properties": {
+        "ownerUid": {
+          "type": "string",
+          "description": "Firebase Auth UID of the Launch HQ owner",
+          "maxLength": 128
+        },
+        "ownerEmail": {
+          "type": "string",
+          "description": "Email address of the Launch HQ owner",
+          "maxLength": 256
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp when the HQ was claimed",
+          "maxLength": 64
+        },
+        "liveUrl": {
+          "type": "string",
+          "description": "Public URL of the live landing page for the Launch Kit",
+          "maxLength": 512
+        },
+        "visitorsCount": {
+          "type": "number",
+          "description": "Approximate visitor count entered by owner"
+        },
+        "checklist": {
+          "type": "object",
+          "description": "Checklist progress map"
+        }
+      },
+      "required": ["ownerUid", "ownerEmail", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/leads/{leadId}": {
+      "schema": "Lead",
+      "description": "Public write-only lead submissions for the early-access audit waitlist"
+    },
+    "/settings/{settingId}": {
+      "schema": "AppSetting",
+      "description": "Application settings and owner identity for Launch HQ"
+    }
+  }
+}

@@ -1,0 +1,82 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global default-deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Hardened Helper Functions
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function hasSettings() {
+      return exists(/databases/$(database)/documents/settings/app);
+    }
+
+    function getSettings() {
+      return get(/databases/$(database)/documents/settings/app).data;
+    }
+
+    function isOwner() {
+      return isSignedIn() && hasSettings() && request.auth.uid == getSettings().ownerUid;
+    }
+
+    function isValidLead(data) {
+      return data.keys().hasAll(['email', 'source', 'createdAt'])
+        && data.keys().hasOnly(['email', 'source', 'createdAt', 'tier', 'timestamp'])
+        && data.email is string
+        && data.email.size() >= 5
+        && data.email.size() <= 256
+        && data.email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$')
+        && data.source is string
+        && data.source.size() <= 64
+        && data.createdAt is string
+        && data.createdAt.size() <= 64
+        && (!('tier' in data) || data.tier == null || (data.tier is string && data.tier.size() <= 32))
+        && (!('timestamp' in data) || data.timestamp == request.time);
+    }
+
+    function isValidSettings(data) {
+      return data.keys().hasAll(['ownerUid', 'ownerEmail', 'createdAt'])
+        && data.keys().hasOnly(['ownerUid', 'ownerEmail', 'createdAt', 'liveUrl', 'visitorsCount', 'checklist'])
+        && data.ownerUid is string
+        && data.ownerUid.size() <= 128
+        && data.ownerEmail is string
+        && data.ownerEmail.size() <= 256
+        && data.createdAt is string
+        && data.createdAt.size() <= 64
+        && (!('liveUrl' in data) || (data.liveUrl is string && data.liveUrl.size() <= 512))
+        && (!('visitorsCount' in data) || (data.visitorsCount is number && data.visitorsCount >= 0))
+        && (!('checklist' in data) || (data.checklist is map));
+    }
+
+    // Leads collection: Public write-only lead capture
+    // Anyone may CREATE a lead (with basic email validation)
+    // ONLY the authenticated owner can READ (list, get) leads
+    match /leads/{leadId} {
+      allow create: if isValidId(leadId) && isValidLead(request.resource.data);
+      allow read: if isOwner();
+      allow update: if false;
+      allow delete: if false;
+    }
+
+    // Settings collection:
+    // First signed-in user can create the settings doc to claim ownership
+    // Only the owner can read or update the settings doc
+    match /settings/{settingId} {
+      allow get: if isSignedIn() && (!hasSettings() || resource.data.ownerUid == request.auth.uid);
+      allow list: if isOwner();
+      allow create: if isSignedIn() && settingId == 'app' && !hasSettings() && request.resource.data.ownerUid == request.auth.uid && isValidSettings(request.resource.data);
+      allow update: if isOwner() && settingId == 'app' && request.resource.data.ownerUid == resource.data.ownerUid && isValidSettings(request.resource.data);
+      allow delete: if false;
+    }
+  }
+}

@@ -1,24 +1,31 @@
 @import "tailwindcss";
 
 :root {
-  /* Modern Clean Canvas Tokens (Zentra & Autopilot Inspiration) */
-  --color-canvas: #ECEFF3;
-  --color-background: #F4F6F9;
+  /* Refero-Inspired Architectural Stone & Deep Obsidian Tokens */
+  --color-canvas: #F5F5F3;
+  --color-background: #F5F5F3;
   --color-surface: #FFFFFF;
-  --color-surface-subtle: #F8FAFC;
-  --color-surface-muted: #F1F4F8;
-  --color-border: #E2E6ED;
-  --color-border-subtle: #EEF1F6;
-  --color-border-strong: #CBD3DF;
+  --color-surface-subtle: #FAFAF9;
+  --color-surface-muted: #EBEBE7;
+  --color-border: #E2E2DC;
+  --color-border-subtle: #ECECE8;
+  --color-border-strong: #C9C9C1;
+
+  /* Deep Obsidian Surfaces (Orynthiq & Quantix Inspired) */
+  --color-obsidian: #0A0B0E;
+  --color-obsidian-surface: #12141A;
+  --color-obsidian-elevated: #191C24;
+  --color-obsidian-border: rgba(255, 255, 255, 0.09);
 
   /* High-Contrast Typography */
-  --color-text-primary: #0F172A;
-  --color-text-secondary: #475569;
-  --color-text-muted: #64748B;
-  --color-text-subtle: #94A3B8;
+  --color-text-primary: #0B0C0E;
+  --color-text-secondary: #4B5058;
+  --color-text-muted: #6E737D;
+  --color-text-subtle: #9499A3;
 
-  /* Brand Accents: Restrained Warm Amber + Precision Cobalt & Emerald */
+  /* Focused Accent: Signal Amber + Deep Obsidian Ink */
   --color-accent: #D97706;
+  --color-accent-bright: #F59E0B;
   --color-accent-hover: #B45309;
   --color-accent-subtle: #FEF3C7;
   --color-accent-border: #FCD34D;
@@ -29,19 +36,23 @@
   --color-rose: #F43F5E;
   --color-danger: #DC2626;
 
-  /* Typography */
-  --font-heading: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-body: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'Geist Mono', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  /* Typography: 2+1 Expressive Display + Crisp Body + Tabular Mono */
+  --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* Geometry & Shadows */
-  --radius-card: 24px;
-  --radius-bento: 28px;
+  /* Geometry */
+  --radius-card: 20px;
+  --radius-bento: 24px;
   --radius-sm: 8px;
   --radius-pill: 9999px;
 }
 
 /* Global Reset & Base Typography */
+html {
+  scroll-behavior: smooth;
+}
+
 html, body {
   overflow-x: hidden;
   max-width: 100vw;
@@ -62,8 +73,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   text-wrap: balance;
-  letter-spacing: -0.025em;
-  color: var(--color-text-primary);
+  letter-spacing: -0.03em;
 }
 
 p, li, blockquote {
@@ -78,7 +88,7 @@ input, textarea, select {
 
 code, pre, .font-mono {
   font-family: var(--font-mono);
-  font-feature-settings: "tnum" 1, "cv01" 1;
+  font-feature-settings: "tnum" 1, "zero" 1;
 }
 
 .tabular-nums {
@@ -86,13 +96,28 @@ code, pre, .font-mono {
   font-feature-settings: "tnum" 1;
 }
 
-/* Diagonal Stripe Textures (From Zentra Volumetric Chart & Bars) */
+/* Subtle Architectural Grid Background (Crypto + Engineering Ledger Hybrid) */
+.bg-architectural-grid {
+  background-image:
+    linear-gradient(to right, rgba(11, 12, 14, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(11, 12, 14, 0.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.bg-architectural-grid-dark {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Diagonal Stripe Textures for Volumetric Charts */
 .pattern-stripes-green {
   background-color: #10B981;
   background-image: repeating-linear-gradient(
     45deg,
-    rgba(255, 255, 255, 0.28) 0,
-    rgba(255, 255, 255, 0.28) 3px,
+    rgba(255, 255, 255, 0.25) 0,
+    rgba(255, 255, 255, 0.25) 3px,
     transparent 3px,
     transparent 7px
   );
@@ -102,8 +127,8 @@ code, pre, .font-mono {
   background-color: #3B82F6;
   background-image: repeating-linear-gradient(
     45deg,
-    rgba(255, 255, 255, 0.3) 0,
-    rgba(255, 255, 255, 0.3) 3px,
+    rgba(255, 255, 255, 0.28) 0,
+    rgba(255, 255, 255, 0.28) 3px,
     transparent 3px,
     transparent 7px
   );
@@ -113,8 +138,8 @@ code, pre, .font-mono {
   background-color: #F59E0B;
   background-image: repeating-linear-gradient(
     45deg,
-    rgba(255, 255, 255, 0.3) 0,
-    rgba(255, 255, 255, 0.3) 3px,
+    rgba(255, 255, 255, 0.28) 0,
+    rgba(255, 255, 255, 0.28) 3px,
     transparent 3px,
     transparent 7px
   );
@@ -124,19 +149,19 @@ code, pre, .font-mono {
   background-color: #F43F5E;
   background-image: repeating-linear-gradient(
     45deg,
-    rgba(255, 255, 255, 0.3) 0,
-    rgba(255, 255, 255, 0.3) 3px,
+    rgba(255, 255, 255, 0.28) 0,
+    rgba(255, 255, 255, 0.28) 3px,
     transparent 3px,
     transparent 7px
   );
 }
 
 .pattern-stripes-slate {
-  background-color: #94A3B8;
+  background-color: #64748B;
   background-image: repeating-linear-gradient(
     45deg,
-    rgba(255, 255, 255, 0.35) 0,
-    rgba(255, 255, 255, 0.35) 3px,
+    rgba(255, 255, 255, 0.25) 0,
+    rgba(255, 255, 255, 0.25) 3px,
     transparent 3px,
     transparent 7px
   );
@@ -144,7 +169,7 @@ code, pre, .font-mono {
 
 /* Primary Tactile Buttons */
 .btn-primary {
-  background-color: #0F172A;
+  background-color: #0B0C0E;
   color: #FFFFFF;
   padding: 11px 22px;
   border-radius: 9999px;
@@ -155,28 +180,27 @@ code, pre, .font-mono {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #1E293B;
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.16), 0 2px 4px 0 rgba(15, 23, 42, 0.08);
-  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid #1C1F26;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.14), 0 2px 6px 0 rgba(11, 12, 14, 0.1);
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), background-color 160ms ease, box-shadow 160ms ease;
   cursor: pointer;
-  min-height: 42px;
+  min-height: 44px;
 }
 
 @media (hover: hover) {
   .btn-primary:hover {
-    background-color: #1E293B;
-    transform: translateY(-0.5px);
-    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.2), 0 4px 8px 0 rgba(15, 23, 42, 0.12);
+    background-color: #1F2229;
+    transform: translateY(-1px);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.2), 0 6px 14px -2px rgba(11, 12, 14, 0.16);
   }
 }
 
 .btn-primary:active {
   transform: translateY(0.5px);
-  box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 .btn-primary-sm {
-  background-color: #0F172A;
+  background-color: #0B0C0E;
   color: #FFFFFF;
   padding: 8px 18px;
   border-radius: 9999px;
@@ -187,23 +211,50 @@ code, pre, .font-mono {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #1E293B;
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15), 0 1px 3px 0 rgba(15, 23, 42, 0.08);
-  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid #1C1F26;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.14);
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), background-color 160ms ease;
   cursor: pointer;
   min-height: 38px;
 }
 
 @media (hover: hover) {
   .btn-primary-sm:hover {
-    background-color: #1E293B;
+    background-color: #1F2229;
     transform: translateY(-0.5px);
   }
 }
 
 .btn-amber {
-  background-color: #D97706;
-  color: #FFFFFF;
+  background-color: #F59E0B;
+  color: #0A0B0E;
+  padding: 11px 22px;
+  border-radius: 9999px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14.5px;
+  line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #D97706;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.35), 0 4px 14px -2px rgba(245, 158, 11, 0.3);
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), background-color 160ms ease;
+  cursor: pointer;
+  min-height: 44px;
+}
+
+@media (hover: hover) {
+  .btn-amber:hover {
+    background-color: #FBBF24;
+    transform: translateY(-1px);
+  }
+}
+
+.btn-secondary {
+  background-color: #FFFFFF;
+  color: #0B0C0E;
+  border: 1px solid #E2E2DC;
   padding: 11px 22px;
   border-radius: 9999px;
   font-family: var(--font-body);
@@ -213,65 +264,34 @@ code, pre, .font-mono {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #B45309;
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.25), 0 2px 4px 0 rgba(217, 119, 6, 0.2);
-  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), border-color 160ms ease, background-color 160ms ease;
   cursor: pointer;
-  min-height: 42px;
-}
-
-@media (hover: hover) {
-  .btn-amber:hover {
-    background-color: #B45309;
-    transform: translateY(-0.5px);
-    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.3), 0 4px 10px 0 rgba(217, 119, 6, 0.25);
-  }
-}
-
-.btn-secondary {
-  background-color: #FFFFFF;
-  color: #0F172A;
-  border: 1px solid #E2E6ED;
-  padding: 11px 22px;
-  border-radius: 9999px;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 14.5px;
-  line-height: 1.2;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
-  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-  min-height: 42px;
+  min-height: 44px;
 }
 
 @media (hover: hover) {
   .btn-secondary:hover {
-    border-color: #CBD3DF;
-    background-color: #F8FAFC;
-    transform: translateY(-0.5px);
+    border-color: #0B0C0E;
+    background-color: #FAFAF9;
+    transform: translateY(-1px);
   }
 }
 
 /* Typography Hierarchy */
 .spec-h1 {
   font-family: var(--font-heading);
-  font-size: clamp(28px, 5.8vw, 54px);
+  font-size: clamp(2.25rem, 4.8vw, 3.75rem);
   font-weight: 700;
-  line-height: 1.15;
-  color: #0F172A;
-  letter-spacing: -0.035em;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
 }
 
 .spec-h2 {
   font-family: var(--font-heading);
-  font-size: clamp(22px, 4.4vw, 36px);
+  font-size: clamp(1.625rem, 3.6vw, 2.5rem);
   font-weight: 700;
-  line-height: 1.22;
-  color: #0F172A;
-  letter-spacing: -0.025em;
+  line-height: 1.16;
+  letter-spacing: -0.03em;
 }
 
 .spec-h3 {
@@ -279,8 +299,7 @@ code, pre, .font-mono {
   font-size: 19px;
   font-weight: 600;
   line-height: 1.35;
-  color: #0F172A;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
 }
 
 .spec-body {
@@ -288,14 +307,13 @@ code, pre, .font-mono {
   font-size: 16px;
   font-weight: 400;
   line-height: 1.6;
-  color: #475569;
 }
 
 /* Custom Range Input */
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
-  background: #E2E6ED;
+  background: #E2E2DC;
   height: 6px;
   border-radius: 9999px;
   outline: none;
@@ -307,10 +325,10 @@ input[type="range"]::-webkit-slider-thumb {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #0F172A;
+  background: #0B0C0E;
   cursor: pointer;
   border: 2.5px solid #FFFFFF;
-  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.25);
+  box-shadow: 0 2px 6px rgba(11, 12, 14, 0.25);
   transition: transform 150ms ease;
 }
 
@@ -318,16 +336,12 @@ input[type="range"]::-webkit-slider-thumb:hover {
   transform: scale(1.15);
 }
 
-/* Bento card styling */
-.bento-card {
-  background-color: #FFFFFF;
-  border: 1px solid #E2E6ED;
-  border-radius: 24px;
-  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.03), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
-  transition: border-color 150ms ease, box-shadow 150ms ease;
-}
-
-.bento-card-interactive:hover {
-  border-color: #CBD3DF;
-  box-shadow: 0 10px 25px -3px rgba(15, 23, 42, 0.05), 0 4px 10px -2px rgba(15, 23, 42, 0.02);
+/* Reduced Motion Compliance */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

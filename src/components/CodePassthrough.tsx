@@ -18,7 +18,7 @@ client = OpenAI(
 response = client.chat.completions.create(
     model="gpt-4o",
     messages=[{"role": "user", "content": prompt}],
-) `,
+)`,
     node: `// 1. Swap base URL & pass task ID in your OpenAI client
 import OpenAI from "openai";
 
@@ -51,30 +51,24 @@ const response = await client.chat.completions.create({
   };
 
   return (
-    <div className="rounded-[24px] border border-[#E2E6ED] bg-[#0F172A] overflow-hidden shadow-xl">
+    <div className="rounded-[24px] border border-white/12 bg-[#12141A] overflow-hidden shadow-[0_24px_60px_-15px_rgba(0,0,0,0.5)]">
       {/* Code Header Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-4 sm:px-5 py-3 border-b border-[#1E293B] bg-[#1E293B]/70">
-        <div className="flex items-center gap-2">
-          <span className="hidden sm:inline-block w-2.5 h-2.5 rounded-full bg-[#334155]" />
-          <span className="hidden sm:inline-block w-2.5 h-2.5 rounded-full bg-[#334155]" />
-          <span className="hidden sm:inline-block w-2.5 h-2.5 rounded-full bg-[#334155]" />
-          <span className="font-mono text-[11px] sm:text-[11.5px] text-[#94A3B8]">
-            <span className="hidden sm:inline">Zero SDK • OpenAI Compatible Passthrough</span>
-            <span className="sm:hidden">Zero SDK • OpenAI Compatible</span>
-          </span>
-        </div>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-5 py-3.5 border-b border-white/10 bg-[#161922]">
+        <span className="font-mono text-[12px] text-[#9499A3]">
+          OpenAI-Compatible Passthrough · Zero SDK Required
+        </span>
 
-        <div className="flex items-center justify-between sm:justify-end gap-2 w-full sm:w-auto">
-          {/* Language Tabs */}
-          <div className="flex items-center bg-[#0F172A] rounded-full p-1 border border-[#334155]">
+        <div className="flex items-center justify-between sm:justify-end gap-2.5 w-full sm:w-auto">
+          <div className="flex items-center bg-[#0A0B0E] rounded-full p-1 border border-white/10">
             {(['python', 'node', 'curl'] as const).map((lang) => (
               <button
                 key={lang}
+                type="button"
                 onClick={() => setActiveTab(lang)}
-                className={`px-2.5 sm:px-3 py-1 text-[11px] sm:text-[11.5px] font-mono rounded-full transition-all cursor-pointer ${
+                className={`px-3 py-1 text-[11.5px] font-mono rounded-full transition-colors cursor-pointer whitespace-nowrap ${
                   activeTab === lang
-                    ? 'bg-[#334155] text-[#FCD34D] font-bold shadow-xs'
-                    : 'text-[#94A3B8] hover:text-[#FFFFFF]'
+                    ? 'bg-[#F59E0B] text-[#0A0B0E] font-bold'
+                    : 'text-[#9499A3] hover:text-white'
                 }`}
               >
                 {lang === 'node' ? 'TypeScript' : lang === 'python' ? 'Python' : 'cURL'}
@@ -83,8 +77,9 @@ const response = await client.chat.completions.create({
           </div>
 
           <button
+            type="button"
             onClick={handleCopy}
-            className="px-3 py-1 text-[11px] sm:text-[11.5px] font-mono font-medium rounded-full border border-[#475569] bg-[#334155] text-[#FFFFFF] hover:bg-[#475569] cursor-pointer transition-colors shrink-0"
+            className="px-3.5 py-1.5 text-[11.5px] font-mono font-medium rounded-full border border-white/15 bg-white/5 text-white hover:bg-white/10 cursor-pointer transition-colors shrink-0 whitespace-nowrap"
             aria-label="Copy code snippet"
           >
             {copied ? 'Copied ✓' : 'Copy'}
@@ -93,8 +88,8 @@ const response = await client.chat.completions.create({
       </div>
 
       {/* Code Block */}
-      <div className="p-4 sm:p-6 overflow-x-auto">
-        <pre className="font-mono text-[13px] text-[#E2E8F0] leading-[1.65]">
+      <div className="p-5 sm:p-7 overflow-x-auto bg-[#0D0F14]">
+        <pre className="font-mono text-[13px] text-[#E5E7EB] leading-[1.68]">
           <code>{snippets[activeTab]}</code>
         </pre>
       </div>

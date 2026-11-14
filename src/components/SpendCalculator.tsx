@@ -8,42 +8,36 @@ export const SpendCalculator: React.FC<SpendCalculatorProps> = ({ onOpenAudit })
   const [monthlySpend, setMonthlySpend] = useState<number>(18000);
   const [retryRate, setRetryRate] = useState<number>(16);
 
-  // Exact preserved calculation formulas:
-  // Retry loop waste represents ~65% of runaway spend
-  // Context resend overhead accounts for ~25%
-  // Failed unfinished tasks ~10%
   const totalWastedPercent = (retryRate * 1.5) / 100;
   const estimatedWaste = Math.round(monthlySpend * Math.min(totalWastedPercent, 0.45));
   const estimatedRecoverable = Math.round(estimatedWaste * 0.88);
   const netRoiMultiplier = (estimatedRecoverable / 499).toFixed(1);
 
   return (
-    <div className="rounded-[24px] sm:rounded-[28px] border border-[#E2E6ED] bg-[#FFFFFF] p-4 sm:p-9 space-y-6 sm:space-y-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 sm:pb-5 border-b border-[#EEF1F6]">
-        <div>
-          <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-[#FFFBEB] border border-[#FDE68A] text-[10.5px] sm:text-[11px] font-mono text-[#D97706] font-semibold">
-            <span className="hidden sm:inline">FINOPS RUNAWAY SPEND ESTIMATOR</span>
-            <span className="sm:hidden">RUNAWAY SPEND ESTIMATOR</span>
+    <div className="rounded-[24px] sm:rounded-[28px] border border-[#E2E2DC] bg-[#FFFFFF] p-6 sm:p-9 space-y-8 shadow-[0_4px_20px_-4px_rgba(11,12,14,0.04)]">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pb-5 border-b border-[#ECECE8]">
+        <div className="space-y-1">
+          <div className="text-[11.5px] font-mono text-[#6E737D] uppercase tracking-wider">
+            Runaway Spend Estimator · Sample Model
           </div>
-          <h3 className="text-[19px] sm:text-[22px] font-bold text-[#0F172A] mt-1.5" style={{ fontFamily: 'var(--font-heading)' }}>
+          <h3 className="text-[20px] sm:text-[24px] font-bold text-[#0B0C0E]" style={{ fontFamily: 'var(--font-heading)' }}>
             Estimate your monthly recoverable spend
           </h3>
         </div>
-        <div className="text-[11px] sm:text-[12px] font-mono text-[#64748B] px-3 py-1 rounded-full bg-[#F1F4F8] border border-[#E2E6ED] self-start sm:self-auto">
-          Sample Estimation Model
+        <div className="text-[12px] font-mono text-[#6E737D]">
+          Adjust spend & loop frequency
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         {/* Sliders Column */}
-        <div className="lg:col-span-7 space-y-6 sm:space-y-7">
-          {/* Monthly Spend Slider */}
-          <div className="space-y-2.5 sm:space-y-3">
+        <div className="lg:col-span-7 space-y-7">
+          <div className="space-y-3">
             <div className="flex flex-wrap justify-between items-baseline gap-1">
-              <label htmlFor="monthly-spend-slider" className="text-[13.5px] sm:text-[14.5px] font-medium text-[#475569]">
+              <label htmlFor="monthly-spend-slider" className="text-[14.5px] font-medium text-[#4B5058]">
                 Monthly AI Agent Model Spend
               </label>
-              <span className="text-[18px] sm:text-[20px] font-mono font-bold text-[#0F172A] tabular-nums">
+              <span className="text-[20px] font-mono font-bold text-[#0B0C0E] tabular-nums">
                 ${monthlySpend.toLocaleString()}/mo
               </span>
             </div>
@@ -55,22 +49,21 @@ export const SpendCalculator: React.FC<SpendCalculatorProps> = ({ onOpenAudit })
               step="1000"
               value={monthlySpend}
               onChange={(e) => setMonthlySpend(Number(e.target.value))}
-              className="w-full cursor-pointer accent-[#0F172A]"
+              className="w-full cursor-pointer accent-[#0B0C0E]"
             />
-            <div className="flex justify-between text-[10.5px] sm:text-[11px] font-mono text-[#64748B] tabular-nums">
+            <div className="flex justify-between text-[11px] font-mono text-[#6E737D] tabular-nums">
               <span>$5,000</span>
               <span>$25,000</span>
               <span>$50,000</span>
             </div>
           </div>
 
-          {/* Retry Rate Slider */}
-          <div className="space-y-2.5 sm:space-y-3">
+          <div className="space-y-3">
             <div className="flex flex-wrap justify-between items-baseline gap-1">
-              <label htmlFor="retry-rate-slider" className="text-[13.5px] sm:text-[14.5px] font-medium text-[#475569]">
+              <label htmlFor="retry-rate-slider" className="text-[14.5px] font-medium text-[#4B5058]">
                 Estimated Retry / Loop Frequency
               </label>
-              <span className="text-[18px] sm:text-[20px] font-mono font-bold text-[#D97706] tabular-nums">
+              <span className="text-[20px] font-mono font-bold text-[#D97706] tabular-nums">
                 {retryRate}% of runs
               </span>
             </div>
@@ -84,49 +77,48 @@ export const SpendCalculator: React.FC<SpendCalculatorProps> = ({ onOpenAudit })
               onChange={(e) => setRetryRate(Number(e.target.value))}
               className="w-full cursor-pointer accent-[#D97706]"
             />
-            <div className="flex justify-between text-[10.5px] sm:text-[11px] font-mono text-[#64748B]">
+            <div className="flex justify-between text-[11px] font-mono text-[#6E737D]">
               <span>5% (Light)</span>
-              <span>15% <span className="hidden sm:inline">(Typical agent)</span></span>
-              <span>35% <span className="hidden sm:inline">(High loop)</span></span>
+              <span>15% (Typical agent)</span>
+              <span>35% (High loop)</span>
             </div>
           </div>
         </div>
 
-        {/* Calculated Results Box */}
-        <div className="lg:col-span-5 rounded-[20px] sm:rounded-[22px] bg-[#F8FAFC] border border-[#E2E6ED] p-4 sm:p-6 space-y-4 sm:space-y-5">
+        {/* Results Column separated cleanly by hairline */}
+        <div className="lg:col-span-5 lg:pl-8 lg:border-l border-[#ECECE8] space-y-5">
           <div className="space-y-3">
-            <div className="flex items-center justify-between text-[13.5px] sm:text-[14px]">
-              <span className="text-[#64748B]">Unmonitored loop waste:</span>
+            <div className="flex items-center justify-between text-[14px]">
+              <span className="text-[#6E737D]">Unmonitored loop waste:</span>
               <span className="font-mono text-[#DC2626] font-bold tabular-nums">
                 ~${estimatedWaste.toLocaleString()}/mo
               </span>
             </div>
 
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-[13.5px] sm:text-[14px] pt-3 border-t border-[#E2E6ED]">
-              <span className="text-[#475569] font-medium">Recoverable with per-task caps:</span>
-              <span className="font-mono text-[#D97706] text-[20px] sm:text-[22px] font-extrabold tabular-nums">
+            <div className="flex items-baseline justify-between gap-2 pt-3 border-t border-[#ECECE8]">
+              <span className="text-[14px] text-[#0B0C0E] font-medium">Recoverable with caps:</span>
+              <span className="font-mono text-[#D97706] text-[24px] font-bold tabular-nums">
                 ~${estimatedRecoverable.toLocaleString()}/mo
               </span>
             </div>
 
-            <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-[#ECFDF5] border border-[#A7F3D0] text-[11px] sm:text-[12px] font-mono text-[#059669] font-semibold max-w-full">
-              <span>✓</span>
-              <span className="truncate">Team plan payoff: {netRoiMultiplier}x monthly return</span>
+            <div className="text-[12.5px] font-mono text-[#059669] font-medium pt-1 tabular-nums">
+              ✓ Team plan payoff: {netRoiMultiplier}x monthly return
             </div>
           </div>
 
           <button
+            type="button"
             onClick={() => onOpenAudit('spend_calculator')}
-            className="w-full btn-primary text-[14px] py-2.5 cursor-pointer shadow-sm"
+            className="w-full btn-primary text-[14px] py-2.5"
           >
             Audit my real numbers for free
           </button>
         </div>
       </div>
 
-      {/* Flagged Assumption Note */}
-      <div className="pt-3 text-[12px] text-[#64748B] font-mono border-t border-[#EEF1F6]">
-        Note: Calculation estimates loop frequency waste based on IDC (July 2026) enterprise survey findings. Individual results vary with workload retry logic and token payload size.
+      <div className="pt-4 text-[12px] text-[#6E737D] font-mono border-t border-[#ECECE8]">
+        Note: Calculation estimates loop frequency waste based on IDC (July 2026) enterprise survey findings. Individual results vary with workload retry logic and payload size.
       </div>
     </div>
   );

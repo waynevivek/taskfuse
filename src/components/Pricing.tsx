@@ -51,79 +51,89 @@ export const Pricing: React.FC<PricingProps> = ({ onSelectTier }) => {
   ];
 
   return (
-    <section id="pricing" className="py-12 sm:py-16 md:py-24 border-b border-[#E2E6ED]">
-      <div className="max-w-[1240px] mx-auto px-4 sm:px-6">
-        <div className="max-w-[760px] mb-8 sm:mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#E2E6ED] text-[11px] sm:text-[12px] font-mono text-[#D97706] font-semibold mb-3">
-            <span>TRANSPARENT SUBSCRIPTION</span>
+    <section id="pricing" className="py-16 sm:py-24 bg-[#F5F5F3] border-b border-[#E2E2DC]">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
+        <div className="max-w-[740px] mb-10 sm:mb-14 space-y-2.5">
+          <div className="text-[12px] font-mono text-[#6E737D] uppercase tracking-wider">
+            05. Transparent Subscription
           </div>
-          <h2 className="spec-h2">
+          <h2 className="spec-h2 text-[#0B0C0E]">
             Priced per completed task, not per token
           </h2>
-          <p className="spec-body text-[16px] sm:text-[17px] text-[#475569] mt-2">
-            No surprise overage fees. Lock in early founding pricing with a free 7-day spend audit.
+          <p className="spec-body text-[16.5px] text-[#4B5058] max-w-[56ch]">
+            No surprise overage fees. Lock in founding pricing with a free 7-day spend audit.
           </p>
         </div>
 
-        {/* 3 Bento Pricing Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6 items-stretch">
+        {/* Curely-Inspired 3-Tier Comparison with Obsidian Elevated Center Tier */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
           {tiers.map((tier) => (
             <div
               key={tier.name}
-              className={`relative rounded-[24px] sm:rounded-[28px] bg-[#FFFFFF] p-6 sm:p-8 flex flex-col justify-between transition-all ${
+              className={`rounded-[24px] p-7 sm:p-8 flex flex-col justify-between transition-colors ${
                 tier.isRecommended
-                  ? 'border-2 border-[#D97706] shadow-[0_12px_40px_-6px_rgba(217,119,6,0.12)]'
-                  : 'border border-[#E2E6ED] shadow-[0_4px_20px_-2px_rgba(15,23,42,0.03)] hover:border-[#CBD3DF]'
+                  ? 'bg-[#111318] text-white border border-[#F59E0B]/60 shadow-[0_24px_60px_-15px_rgba(11,12,14,0.35)]'
+                  : 'bg-[#FFFFFF] text-[#0B0C0E] border border-[#E2E2DC] shadow-[0_2px_12px_rgba(11,12,14,0.03)]'
               }`}
             >
-              {/* Amber Badge for Recommended tier */}
-              {tier.isRecommended && (
-                <div className="absolute -top-3.5 left-6 sm:left-8 px-3 py-0.5 rounded-full bg-[#D97706] text-[#FFFFFF] text-[10.5px] sm:text-[11px] font-bold tracking-wider uppercase font-mono shadow-sm">
-                  Recommended Plan
-                </div>
-              )}
-
               <div className="space-y-6">
-                <div className="flex items-baseline justify-between border-b border-[#EEF1F6] pb-5">
-                  <h3 className="text-[20px] font-bold text-[#0F172A]" style={{ fontFamily: 'var(--font-heading)' }}>
-                    {tier.name}
-                  </h3>
+                <div className={`flex items-baseline justify-between pb-5 border-b ${tier.isRecommended ? 'border-white/10' : 'border-[#ECECE8]'}`}>
+                  <div>
+                    <h3
+                      className={`text-[20px] font-bold ${tier.isRecommended ? 'text-white' : 'text-[#0B0C0E]'}`}
+                      style={{ fontFamily: 'var(--font-heading)' }}
+                    >
+                      {tier.name}
+                    </h3>
+                    {tier.isRecommended && (
+                      <div className="text-[11px] font-mono text-[#F59E0B] uppercase tracking-wider mt-1">
+                        Recommended Plan
+                      </div>
+                    )}
+                  </div>
                   <div className="flex items-baseline gap-1">
-                    <span className="text-[36px] font-bold text-[#0F172A] tabular-nums font-mono">
+                    <span className={`text-[36px] font-bold tabular-nums font-mono ${tier.isRecommended ? 'text-white' : 'text-[#0B0C0E]'}`}>
                       {tier.price}
                     </span>
-                    <span className="text-[14px] text-[#64748B]">
+                    <span className={`text-[14px] ${tier.isRecommended ? 'text-[#9499A3]' : 'text-[#6E737D]'}`}>
                       {tier.period}
                     </span>
                   </div>
                 </div>
 
-                <div className="text-[13.5px] font-mono font-semibold text-[#D97706]">
+                <div className={`text-[13.5px] font-mono font-semibold tabular-nums ${tier.isRecommended ? 'text-[#F59E0B]' : 'text-[#D97706]'}`}>
                   {tier.tasks}
                 </div>
 
                 {/* Features list */}
-                <div className="pt-2 border-t border-[#EEF1F6] space-y-3">
+                <div className={`pt-4 border-t space-y-3 ${tier.isRecommended ? 'border-white/10' : 'border-[#ECECE8]'}`}>
                   {tier.features.map((f, i) => (
-                    <div key={i} className="flex items-start gap-3 text-[14.5px] text-[#0F172A]">
-                      <span className="text-[#059669] font-bold shrink-0 text-[13px] mt-0.5">✓</span>
+                    <div
+                      key={i}
+                      className={`flex items-start gap-3 text-[14.5px] ${tier.isRecommended ? 'text-[#E5E7EB]' : 'text-[#0B0C0E]'}`}
+                    >
+                      <span className={`font-bold shrink-0 text-[13px] mt-0.5 ${tier.isRecommended ? 'text-[#F59E0B]' : 'text-[#059669]'}`}>
+                        ✓
+                      </span>
                       <span>{f}</span>
                     </div>
                   ))}
                 </div>
 
                 {/* Best for */}
-                <div className="pt-4 border-t border-[#EEF1F6] text-[13px] text-[#64748B] leading-relaxed">
-                  <span className="text-[#0F172A] font-semibold">Best for: </span>
+                <div className={`pt-4 border-t text-[13px] leading-relaxed ${tier.isRecommended ? 'border-white/10 text-[#9499A3]' : 'border-[#ECECE8] text-[#6E737D]'}`}>
+                  <span className={`font-semibold ${tier.isRecommended ? 'text-white' : 'text-[#0B0C0E]'}`}>
+                    Best for:{' '}
+                  </span>
                   {tier.bestFor}
                 </div>
               </div>
 
-              {/* Action Button */}
-              <div className="pt-7">
+              <div className="pt-8">
                 <button
+                  type="button"
                   onClick={() => onSelectTier(tier.name)}
-                  className={`w-full cursor-pointer ${
+                  className={`w-full ${
                     tier.isRecommended ? 'btn-amber' : 'btn-secondary'
                   }`}
                 >

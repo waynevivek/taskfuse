@@ -3,24 +3,22 @@ import { LeadCaptureForm } from './LeadCaptureForm';
 
 export const FinalCTA: React.FC = () => {
   return (
-    <section className="py-14 sm:py-20 md:py-28 border-b border-[#E2E6ED]">
-      <div className="max-w-[1240px] mx-auto px-4 sm:px-6">
-        <div className="max-w-[880px] mx-auto rounded-[24px] sm:rounded-[32px] bg-[#FFFFFF] border border-[#E2E6ED] p-5 sm:p-10 md:p-14 text-center space-y-5 sm:space-y-6 shadow-[0_12px_45px_-8px_rgba(15,23,42,0.08)]">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFFBEB] border border-[#FDE68A] text-[11px] sm:text-[11.5px] font-mono text-[#D97706] font-semibold max-w-full">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#D97706] animate-pulse shrink-0" />
-            <span className="hidden sm:inline">FOUNDING ACCESS INVITATION</span>
-            <span className="sm:hidden">FOUNDING ACCESS</span>
+    <section className="py-16 sm:py-24 bg-[#F5F5F3]">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
+        <div className="rounded-[28px] bg-[#FFFFFF] border border-[#E2E2DC] p-7 sm:p-14 text-center space-y-6 shadow-[0_12px_40px_-14px_rgba(11,12,14,0.06)]">
+          <div className="text-[12px] font-mono text-[#D97706] uppercase tracking-wider font-semibold">
+            Founding Access Invitation
           </div>
 
-          <h2 className="spec-h2 max-w-[680px] mx-auto">
+          <h2 className="spec-h2 text-[#0B0C0E] max-w-[660px] mx-auto">
             Know your cost per finished task before the next invoice teaches it to you.
           </h2>
-          
-          <p className="spec-body text-[15.5px] sm:text-[16.5px] text-[#475569] max-w-[580px] mx-auto">
+
+          <p className="spec-body text-[16px] sm:text-[17px] text-[#4B5058] max-w-[560px] mx-auto">
             Founding users get a free seven-day Agent Spend Audit of one workflow — no card, no commitment, your real numbers first.
           </p>
 
-          <div className="pt-2 sm:pt-3 max-w-[480px] mx-auto text-left">
+          <div className="pt-2 max-w-[500px] mx-auto text-left">
             <LeadCaptureForm source="final_cta" />
           </div>
         </div>

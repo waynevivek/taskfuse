@@ -51,17 +51,18 @@ export const ShareKitModal: React.FC<ShareKitModalProps> = ({ isOpen, onClose })
   };
 
   return (
-    <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm"
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0A0B0E]/70 backdrop-blur-sm"
       onClick={onClose}
     >
-      <div 
-        className="relative w-full max-w-[700px] max-h-[88vh] overflow-y-auto rounded-[24px] sm:rounded-[28px] bg-[#FFFFFF] border border-[#E2E6ED] p-5 sm:p-8 shadow-2xl"
+      <div
+        className="relative w-full max-w-[700px] max-h-[88vh] overflow-y-auto rounded-[24px] bg-[#FFFFFF] border border-[#E2E2DC] p-6 sm:p-8 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <button
+          type="button"
           onClick={onClose}
-          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-[#F1F4F8] text-[#64748B] hover:text-[#0F172A] flex items-center justify-center transition-colors cursor-pointer"
+          className="absolute top-5 right-5 w-9 h-9 rounded-full bg-[#F5F5F3] text-[#4B5058] hover:text-[#0B0C0E] flex items-center justify-center transition-colors cursor-pointer"
           aria-label="Close modal"
         >
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -70,36 +71,37 @@ export const ShareKitModal: React.FC<ShareKitModalProps> = ({ isOpen, onClose })
           </svg>
         </button>
 
-        <div className="mb-6 border-b border-[#EEF1F6] pb-4">
-          <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-[#FFFBEB] border border-[#FDE68A] text-[11px] font-mono text-[#D97706] font-semibold">
-            VALIDATION DISTRIBUTION
+        <div className="mb-6 border-b border-[#ECECE8] pb-4 pr-8">
+          <div className="text-[11.5px] font-mono text-[#D97706] uppercase tracking-wider font-semibold">
+            Validation Distribution
           </div>
-          <h3 className="text-[22px] font-bold text-[#0F172A] mt-2" style={{ fontFamily: 'var(--font-heading)' }}>
+          <h3 className="text-[22px] font-bold text-[#0B0C0E] mt-1" style={{ fontFamily: 'var(--font-heading)' }}>
             Validation Share Kit
           </h3>
-          <p className="text-[14px] text-[#475569] mt-1">
+          <p className="text-[14px] text-[#4B5058] mt-1">
             Pre-written copy tailored for founder-to-founder feedback channels and community validation.
           </p>
         </div>
 
         <div className="space-y-4">
           {posts.map((post, idx) => (
-            <div key={idx} className="p-5 rounded-[20px] bg-[#F8FAFC] border border-[#E2E6ED] space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-[11.5px] font-bold text-[#D97706] px-2.5 py-0.5 rounded-full bg-[#FFFBEB] border border-[#FDE68A]">
+            <div key={idx} className="p-5 rounded-[20px] bg-[#F5F5F3] border border-[#E2E2DC] space-y-3">
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-mono text-[11.5px] font-semibold text-[#6E737D] uppercase tracking-wider">
                   {post.channel}
                 </span>
                 <button
+                  type="button"
                   onClick={() => handleCopy(idx, post.body)}
-                  className="px-3 py-1 text-[11.5px] font-mono rounded-full border border-[#CBD3DF] bg-[#FFFFFF] text-[#0F172A] hover:bg-[#F1F4F8] cursor-pointer transition-colors font-medium"
+                  className="px-3.5 py-1.5 text-[12px] font-mono font-semibold rounded-full bg-[#0B0C0E] text-white hover:bg-[#1F2229] cursor-pointer transition-colors shrink-0"
                 >
                   {copiedIdx === idx ? 'Copied ✓' : 'Copy Text'}
                 </button>
               </div>
-              <div className="text-[14px] font-bold text-[#0F172A]">
+              <div className="text-[14.5px] font-bold text-[#0B0C0E]">
                 {post.title}
               </div>
-              <p className="text-[13px] text-[#475569] leading-relaxed whitespace-pre-line font-mono bg-[#FFFFFF] p-4 rounded-[14px] border border-[#E2E6ED]">
+              <p className="text-[13.5px] text-[#4B5058] leading-relaxed whitespace-pre-line font-mono pt-2 border-t border-[#E2E2DC]">
                 {post.body}
               </p>
             </div>
